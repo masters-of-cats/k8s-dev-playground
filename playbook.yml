@@ -49,6 +49,7 @@
     - vim-nox
     - wget
     - zsh
+    - mercurial
 
   - name: install neovim pip package
     pip: name=neovim executable=/usr/bin/pip
@@ -81,7 +82,11 @@
       dest: ~/.tmux/plugins/tpm
 
   - name: download go
-    get_url: url=https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz dest={{downloads_dir}}/go.tar.gz
+    get_url: url=https://storage.googleapis.com/golang/go1.10.3.linux-amd64.tar.gz dest={{downloads_dir}}/go.tar.gz
+
+  - name: download docker
+    apt:
+      deb: https://download.docker.com/linux/ubuntu/dists/artful/pool/stable/amd64/docker-ce_18.03.1~ce-0~ubuntu_amd64.deb
 
   - name: extract go
     become: true
@@ -90,3 +95,6 @@
 
   - name: clone vim config
     git: repo=https://github.com/luan/vimfiles dest=~/.vim
+
+  - name: clone kubernetes
+    git: repo=https://github.com/kubernetes/kubernetes dest=~/go/src/k8s.io/kubernetes
